@@ -1,104 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
-    <style>
-        body {
-            background-color: #ffe6e6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Valentine?</title>
+  <style>
+    /* Base Styles */
+    body {
+      background-color: #ffe6e6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+      padding: 0 10px;
+      text-align: center;
+    }
 
-        h1 {
-            color: #ff0066;
-            font-size: 3em;
-            transition: all 0.3s ease;
-        }
+    h1 {
+      color: #ff0066;
+      font-size: 6vw; /* Relative to viewport width */
+      transition: all 0.3s ease;
+      margin: 20px 0;
+    }
 
-        .button-container {
-            margin-top: 20px;
-        }
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        button {
-            padding: 15px 30px;
-            font-size: 20px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 10px;
-            transition: all 0.3s ease;
-        }
+    button {
+      padding: 15px 30px;
+      font-size: 4vw; /* Relative font size */
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+      min-width: 100px;
+    }
 
-        #yesBtn {
-            background-color: #ff69b4;
-            color: white;
-        }
+    #yesBtn {
+      background-color: #ff69b4;
+      color: white;
+    }
 
-        #noBtn {
-            background-color: #d3d3d3;
-            color: black;
-        }
+    #noBtn {
+      background-color: #d3d3d3;
+      color: black;
+    }
 
-        #gifContainer {
-            margin-bottom: 20px;
-        }
+    #gifContainer {
+      margin-bottom: 20px;
+      width: 90%;
+      max-width: 400px;
+    }
 
-        #gifContainer img {
-            max-width: 80%;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-    </style>
+    #gifContainer img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Media Query for very small devices */
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 8vw;
+      }
+      button {
+        font-size: 5vw;
+        padding: 10px 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div id="gifContainer">
-        <img src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif" alt="Cute Love Bear with Roses">
-    </div>
-    <h1 id="mainHeading">Will you be my Valentine?</h1>
-    <div class="button-container">
-        <button id="yesBtn">Yes</button>
-        <button id="noBtn">No</button>
-    </div>
+  <div id="gifContainer">
+    <img src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif" alt="Cute Love Bear with Roses" />
+  </div>
+  <h1 id="mainHeading">Will you be my Valentine?</h1>
+  <div class="button-container">
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
 
-    <script>
-        const yesBtn = document.getElementById('yesBtn');
-        const noBtn = document.getElementById('noBtn');
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
 
-        let noClickCount = 0;
-        const noTexts = [
-            "Are you sure?", 
-            "What if I asked really nicely?", 
-            "pretty please", 
-            "with a chocolate?", 
-            "PLEASE HANDSOME",
-            "but : (",
-            "im gonna die",
-            "yep im dead",
-            "ok ur talking to my ghost rn",
-            "please babe",
-            "no :(",
-            "NO :(",
+    let noClickCount = 0;
+    const noTexts = [
+      "Are you sure?",
+      "What if I asked really nicely?",
+      "Pretty please",
+      "With a chocolate?",
+      "PLEASE HANDSOME",
+      "But :(",
+      "I'm gonna die",
+      "Yep, I'm dead",
+      "Okay, you're talking to my ghost now",
+      "Please, babe",
+      "No :(",
+      "NO :("
+    ];
 
-        ];
+    noBtn.addEventListener('click', () => {
+      noClickCount++;
+      // Increase the font size of the Yes button based on click count
+      const newSize = 20 + noClickCount * 5;
+      yesBtn.style.fontSize = newSize + 'px';
+      // Cycle through the array of noTexts
+      noBtn.textContent = noTexts[noClickCount % noTexts.length];
+    });
 
-        noBtn.addEventListener('click', () => {
-            noClickCount++;
-            yesBtn.style.fontSize = (20 + noClickCount * 5) + 'px';  // Corrected font size update
-            noBtn.textContent = noTexts[noClickCount % noTexts.length];
-        });
-
-        yesBtn.addEventListener('click', () => {
-            // Redirect to the next page when "Yes" is clicked
-            window.location.href = 'yesPage.html';
-        });
-    </script>
+    yesBtn.addEventListener('click', () => {
+      // Redirect to the next page when "Yes" is clicked
+      window.location.href = 'yesPage.html';
+    });
+  </script>
 </body>
 </html>
+
