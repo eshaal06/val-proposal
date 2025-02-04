@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #ff0066;
+            font-size: 3em;
+            transition: all 0.3s ease;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #ff69b4;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #d3d3d3;
+            color: black;
+        }
+
+        #gifContainer {
+            margin-bottom: 20px;
+        }
+
+        #gifContainer img {
+            max-width: 80%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="gifContainer">
+        <img src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif" alt="Cute Love Bear with Roses">
+    </div>
+    <h1 id="mainHeading">Will you be my Valentine?</h1>
+    <div class="button-container">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+
+        let noClickCount = 0;
+        const noTexts = [
+            "Are you sure?", 
+            "What if I asked really nicely?", 
+            "pretty please", 
+            "with a chocolate?", 
+            "PLEASE HANDSOME",
+            "but : (",
+            "im gonna die",
+            "yep im dead",
+            "ok ur talking to my ghost rn",
+            "please babe",
+            "no :(",
+            "NO :(",
+
+        ];
+
+        noBtn.addEventListener('click', () => {
+            noClickCount++;
+            yesBtn.style.fontSize = (20 + noClickCount * 5) + 'px';  // Corrected font size update
+            noBtn.textContent = noTexts[noClickCount % noTexts.length];
+        });
+
+        yesBtn.addEventListener('click', () => {
+            // Redirect to the next page when "Yes" is clicked
+            window.location.href = 'yesPage.html';
+        });
+    </script>
+</body>
+</html>
